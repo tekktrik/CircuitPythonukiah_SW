@@ -68,7 +68,11 @@ def test_lighting_times(monkeypatch, aio_username, aio_key, location):
             (lighting_time, lighting_time - adafruit_datetime.timedelta(hours=12), 600)
         )
         assertion_pairs.append(
-            (lighting_time, lighting_time - adafruit_datetime.timedelta(minutes=55), 600)
+            (
+                lighting_time,
+                lighting_time - adafruit_datetime.timedelta(minutes=55),
+                600,
+            )
         )
         assertion_pairs.append(
             (lighting_time, lighting_time - adafruit_datetime.timedelta(minutes=5), 60)
