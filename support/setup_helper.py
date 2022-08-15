@@ -17,5 +17,5 @@ Simple module for holding the connectin status
 class ConnectionStatus:
     """The connection status"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.is_connected = False

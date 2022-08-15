@@ -38,7 +38,7 @@ class Menorah:
         candles_dio: List[DigitalInOut],
         piezo_pin: Pin,
         mute_dio: DigitalInOut,
-    ):
+    ) -> None:
 
         self.shamash = shamash_dio
         self.candles = candles_dio

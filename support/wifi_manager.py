@@ -58,7 +58,7 @@ class WiFi:
     #    reset_dio: DigitalInOut,
     #    gpio0_dio: Optional[DigitalInOut] = None,
     # ):
-    def __init__(self):
+    def __init__(self) -> None:
         # super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
         self._latest_events = None
         self._month_checking = 11
