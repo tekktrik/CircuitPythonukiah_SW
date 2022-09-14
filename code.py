@@ -118,14 +118,14 @@ def main() -> None:
 shamash = DigitalInOut(board.A2)
 shamash.direction = Direction.OUTPUT
 candles_pins = [
-    board.TX,
-    board.SCL,
-    board.SDA,
-    board.A3,
     board.MOSI,
     board.MISO,
     board.SCK,
     board.RX,
+    board.TX,
+    board.SCL,
+    board.SDA,
+    board.A3,
 ]
 candles_dios = []
 for gpio_pin in candles_pins:
