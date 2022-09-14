@@ -31,11 +31,7 @@ try:
 except KeyError as err:
     raise KeyError("You need to add the Adafruit IO information!") from err
 
-TIME_URL = "https://io.adafruit.com/api/v2/%s/integrations/time/clock?x-aio-key=%s" % (
-    _AIO_USERNAME,
-    _AIO_KEY,
-)
-TIME_URL += "&fmt=%25Y-%25m-%25dT%25H%3A%25M%3A%25S.%25L%25z"
+TIME_URL = "https://io.adafruit.com/api/v2/time/ISO-8601"
 
 
 # class WiFi(ESP_SPIcontrol):
