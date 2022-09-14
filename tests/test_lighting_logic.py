@@ -18,10 +18,7 @@ import secrets
 import requests
 import adafruit_datetime
 
-secrets.secrets = {
-    "aio_username": None,
-    "aio_key": None,
-}
+
 secrets.location = {
     "zipcode": None,
 }
@@ -43,19 +40,13 @@ wifi = WiFi()
 wifi.requests = requests
 
 
-def test_lighting_times(monkeypatch, aio_username, aio_key, location):
+def test_lighting_times(monkeypatch, location):
     """Test the lighting time logic"""
 
-    secrets_secrets = {
-        "aio_username": aio_username,
-        "aio_key": aio_key,
-    }
     secrets_location = {
         "zipcode": location,
     }
-    monkeypatch.setattr(wifi_manager, "secrets", secrets_secrets)
     monkeypatch.setattr(wifi_manager, "location", secrets_location)
-
     lighting_times = wifi.get_candle_lighting_times()
 
     for lighting_time in lighting_times:

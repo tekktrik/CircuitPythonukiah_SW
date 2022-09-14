@@ -57,4 +57,4 @@ jobs:
         pip install -r requirements-test.txt
     - name: Test code
       run: |
-        pytest --aio_username ${{ secrets.aio_username }} --aio_key ${{ secrets.aio_key }} --location ${{ secrets.location }}
+        pytest --location ${{ secrets.location }}
