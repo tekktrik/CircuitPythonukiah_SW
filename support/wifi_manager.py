@@ -31,24 +31,9 @@ TIME_URL = "https://io.adafruit.com/api/v2/time/ISO-8601"
 class WiFi:
     """Class for representing the Wi-Fi and the associate functions it provides
     to the auto-menorah
-
-    :param SPI spi: The SPI bus object for the board
-    :param DigitalInOut cs_dio: The chip select digital io for the ESP32
-    :param DigitalInOut ready_dio: The READY digital io for the ESP32
-    :param DigitalInOut reset_dio: The RESET digital io for the ESP32
-    :param DigitalInOut gpio0_dio: The GIO0 digital io for the ESP32, optional
     """
 
-    # def __init__(
-    #    self,
-    #    spi: SPI,
-    #    cs_dio: DigitalInOut,
-    #    ready_dio: DigitalInOut,
-    #    reset_dio: DigitalInOut,
-    #    gpio0_dio: Optional[DigitalInOut] = None,
-    # ):
     def __init__(self) -> None:
-        # super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
         self._latest_events = None
         self._month_checking = 11
         self.requests = None
