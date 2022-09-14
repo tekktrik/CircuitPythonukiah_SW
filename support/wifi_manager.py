@@ -24,13 +24,6 @@ try:
 except ImportError:
     pass
 
-# Get our username, key and desired timezone
-try:
-    _AIO_USERNAME = secrets["aio_username"]
-    _AIO_KEY = secrets["aio_key"]
-except KeyError as err:
-    raise KeyError("You need to add the Adafruit IO information!") from err
-
 TIME_URL = "https://io.adafruit.com/api/v2/time/ISO-8601"
 
 
