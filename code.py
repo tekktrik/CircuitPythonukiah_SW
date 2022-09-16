@@ -132,9 +132,9 @@ for gpio_pin in candles_pins:
     gpio_dio = DigitalInOut(gpio_pin)
     gpio_dio.direction = Direction.OUTPUT
     candles_dios.append(gpio_dio)
-piezo_pin = board.A0
-mute_dio = DigitalInOut(board.A1)
-mute_dio.direction = Direction.INPUT
+piezo_pin = board.A1
+mute_dio = DigitalInOut(board.A0)
+mute_dio.direction = Direction.INPUT  # Has built in pull-up
 menorah = Menorah(shamash, candles_dios, piezo_pin, mute_dio)
 
 wifi = WiFi()
