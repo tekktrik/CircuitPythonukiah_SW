@@ -12,13 +12,16 @@ Main code for functionality, as well as functionalities involving multiple modul
 """
 
 import time
+import dotenv
 import asyncio
 import board
+import usb_cdc
 from adafruit_datetime import timedelta
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.setup_helper import ConnectionStatus
+from valid import setup_validation, play_piezo_warning
 from settings import BURNOUT
 
 
@@ -34,7 +37,7 @@ def display_error() -> None:
 async def display_loading(setup_status: ConnectionStatus, interval: float = 1) -> None:
     """Displays loading state using menorah lights
 
-    :param ConnectonStatus setup_status: The ConnectionStatus linking the setup methods
+    :param ConnectonStatus sif usb_cdc.console.connected and not menorah.is_muted:etup_status: The ConnectionStatus linking the setup methods
     :param float interval: How long to wait between lighting state changes
     """
 
@@ -113,6 +116,9 @@ def main() -> None:
             menorah.sleep_based_on_delta(final_off_time, wifi.get_datetime())
         menorah.turn_off_candles()
 
+    if is_validation:
+        play_piezo_warning(menorah.piezo_pin)
+
     while True:
         pass
 
@@ -143,6 +149,10 @@ wifi = WiFi()
 
 connection_status = ConnectionStatus()
 
+is_validation = usb_cdc.console.connected and dotenv.get_key("TEST_SERVER")
+
 if __name__ == "__main__":
     asyncio.run(setup_menorah())
+    if is_validation:
+        setup_validation(menorah, wifi)
     main()
