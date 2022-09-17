@@ -113,6 +113,8 @@ def main() -> None:
             menorah.sleep_based_on_delta(final_off_time, wifi.get_datetime())
             menorah.turn_off_candles()
 
+    while True:
+        pass
 
 # Initialize candles
 shamash = DigitalInOut(board.A2)
