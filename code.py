@@ -102,8 +102,8 @@ def main() -> None:
             menorah.light_candles(night_index + 1)
             if not menorah.is_muted:
                 menorah.play_sound("support/maoztzur.rtttl")
-                while wifi.get_datetime() < off_time:
-                    menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
+            while wifi.get_datetime() < off_time:
+                menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
             if BURNOUT:
                 menorah.turn_off_candles()
 
