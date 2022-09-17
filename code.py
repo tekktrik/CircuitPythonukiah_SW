@@ -111,7 +111,7 @@ def main() -> None:
         final_off_time = lighting_times[7] + timedelta(hours=24)
         while wifi.get_datetime() < final_off_time:
             menorah.sleep_based_on_delta(final_off_time, wifi.get_datetime())
-            menorah.turn_off_candles()
+        menorah.turn_off_candles()
 
     while True:
         pass
