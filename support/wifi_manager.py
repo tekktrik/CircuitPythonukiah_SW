@@ -124,11 +124,6 @@ class WiFi:
 
         current_datetime: datetime = datetime.fromisoformat(self.get_time())
         current_datetime._tzinfo = timezone.utc  # pylint: disable=protected-access
-
-        # add_delta = timedelta(275, hours=12)
-        # current_datetime += add_delta
-        # print(current_datetime)
-
         return current_datetime
 
     def get_time(self) -> str:
