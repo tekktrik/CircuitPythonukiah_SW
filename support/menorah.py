@@ -126,10 +126,7 @@ class Menorah:
         return not self._mute_dio.value
 
     def play_sound(self) -> None:
-        """Play the given RTTTL file
-
-        :param str sound_file: The RTTTL sound file to play
-        """
+        """Play the globally defined RTTTL file"""
 
         with open(SOUND_FILE, mode="r", encoding="utf-8") as rtttl_file:
             rtttil_contents = rtttl_file.read()
