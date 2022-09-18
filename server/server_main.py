@@ -29,6 +29,7 @@ def setup() -> None:
     server_info.candle_lighting_times = []
     server_info.burnout = False
 
+
 @app.patch("/setup/time/{candle_lighting}")
 def setup_time(candle_lighting: str) -> None:
     """Load times into server"""
@@ -37,15 +38,20 @@ def setup_time(candle_lighting: str) -> None:
     new_lighting_time = datetime.fromisoformat(candle_lighting)
     server_info.candle_lighting_times.append(new_lighting_time)
 
+
 @app.patch("/setup/burnout/{setting}")
 def setup_burnout(setting: int) -> None:
     """Load burnout setting into server"""
     server_info.burnout = bool(setting)
 
+
 @app.patch("/setup/finalize")
 def finalize_setup() -> None:
-    server_info.simulated_time = server_info.candle_lighting_times[0] - timedelta(seconds=10)
+    server_info.simulated_time = server_info.candle_lighting_times[0] - timedelta(
+        seconds=10
+    )
     server_info.test_day = 1
+
 
 @app.get("/time", status_code=200)
 def get_time(response: Response) -> Optional[str]:

@@ -21,6 +21,7 @@ TEST_SERVER = dotenv.get_key(".env", "TEST_SERVER")
 if not TEST_SERVER:
     raise ConnectionError("Server address needed as TEST_SERVER in .env file")
 
+
 def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 3) -> None:
     """Play the piezo buzzer as a warning that this is
     validation mode
@@ -34,6 +35,7 @@ def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 3) -> None:
         time.sleep(1)
     piezo_pwm.deinit()
 
+
 def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
     """Test function for validation testing"""
     global TEST_SERVER
@@ -42,13 +44,17 @@ def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
     play_piezo_warning(menorah_obj.piezo_pin)
 
     # Setup up the test server
-    response = wifi_obj.requests.post("http://"+TEST_SERVER+"/setup")
+    response = wifi_obj.requests.post("http://" + TEST_SERVER + "/setup")
 
     for time in wifi_obj.get_candle_lighting_times():
-        wifi_obj.requests.patch("http://"+TEST_SERVER+"/setup/time/"+time.isoformat())
-    
-    wifi_obj.requests.patch("http://"+TEST_SERVER+"/setup/burnout/"+str(int(BURNOUT)))
-    wifi_obj.requests.patch("http://"+TEST_SERVER+"/setup/finalize")
+        wifi_obj.requests.patch(
+            "http://" + TEST_SERVER + "/setup/time/" + time.isoformat()
+        )
 
-    wifi_manager.TIME_URL = "http://"+TEST_SERVER+"/time"
-    menorah.SOUND_FILE = "support/test.rtttl"    
+    wifi_obj.requests.patch(
+        "http://" + TEST_SERVER + "/setup/burnout/" + str(int(BURNOUT))
+    )
+    wifi_obj.requests.patch("http://" + TEST_SERVER + "/setup/finalize")
+
+    wifi_manager.TIME_URL = "http://" + TEST_SERVER + "/time"
+    menorah.SOUND_FILE = "support/test.rtttl"

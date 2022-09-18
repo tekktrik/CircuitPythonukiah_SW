@@ -121,6 +121,7 @@ def main() -> None:
     while True:
         pass
 
+
 # Initialize candles
 shamash = DigitalInOut(board.A2)
 shamash.direction = Direction.OUTPUT

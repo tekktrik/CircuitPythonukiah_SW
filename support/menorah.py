@@ -27,6 +27,7 @@ except ImportError:
 
 SOUND_FILE = "support/maoztzur.rtttl"
 
+
 class Menorah:
     """Class for representing the menorah and manages lighting and flickering the candles
 

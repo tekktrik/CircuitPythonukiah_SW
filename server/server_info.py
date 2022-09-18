@@ -14,9 +14,15 @@ Code for maintaining the server information and status
 from datetime import datetime, timedelta
 from typing import Optional, Sequence
 
-class ServerInfo:
 
-    def __init__(self, is_testing: bool = False, simulated_time: Optional[datetime] = None, candle_lighting_times: Sequence[datetime] = (), burnout: bool = False):
+class ServerInfo:
+    def __init__(
+        self,
+        is_testing: bool = False,
+        simulated_time: Optional[datetime] = None,
+        candle_lighting_times: Sequence[datetime] = (),
+        burnout: bool = False,
+    ):
         self.is_testing = is_testing
         self._simulated_time = simulated_time if simulated_time else datetime.now()
         self._set_time = datetime.now()
