@@ -33,8 +33,10 @@ if not TEST_SERVER:
 
 
 def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 3) -> None:
-    """Play the piezo buzzer as a warning that this is
-    validation mode
+    """Play the piezo buzzer as a warning that this is validation mode
+
+    :param Pin piezo_pin: The pin connected to the piezo buzzer
+    :param int num_buzzes: The number of buzzes to play
     """
 
     piezo_pwm = PWMOut(piezo_pin, frequency=256, duty_cycle=0)
@@ -47,8 +49,11 @@ def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 3) -> None:
 
 
 def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
-    """Test function for validation testing"""
-    global TEST_SERVER
+    """Test function for validation testing
+
+    :param Menorah menorah_obj: The Menorah object
+    :param WiFi wifi_obj: The WiFi object
+    """
 
     # Play the piezo warning
     play_piezo_warning(menorah_obj.piezo_pin)
