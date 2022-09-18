@@ -80,7 +80,7 @@ class Menorah:
         time_to_sleep = Menorah.get_sleep_time_based_on_delta(
             lighting_time, current_time
         )
-        print(time_to_sleep)
+        print(f"Sleeping for {time_to_sleep} seconds")
         if time_to_sleep > 0:
             time.sleep(time_to_sleep)
 
