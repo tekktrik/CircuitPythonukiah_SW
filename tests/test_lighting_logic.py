@@ -100,7 +100,6 @@ def test_lighting_times(monkeypatch, location):
         )
 
         for event_time, mock_time, expected_sleep in assertion_pairs:
-            print("A")
             assert (
                 Menorah.get_sleep_time_based_on_delta(event_time, mock_time)
                 == expected_sleep
