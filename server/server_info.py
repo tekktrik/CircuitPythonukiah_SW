@@ -52,6 +52,8 @@ class ServerInfo:
 
     @property
     def target_time(self) -> datetime:
-        if self.burnout and self.return_turnoff_time:
+        if self._test_day_index == len(self.candle_lighting_times):
+            return self.candle_lighting_times[-1] + timedelta(hours=24)
+        if self.return_turnoff_time:
             return self.current_lighting_time + timedelta(hours=12)
         return self.current_lighting_time

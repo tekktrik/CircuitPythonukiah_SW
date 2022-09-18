@@ -6,6 +6,7 @@ import time
 import dotenv
 from pwmio import PWMOut
 from settings import BURNOUT
+from support import wifi_manager, menorah
 
 try:
     import typing  # pylint: disable=unused-import
@@ -15,12 +16,12 @@ try:
 except ImportError:
     pass
 
-TEST_SERVER = dotenv.get_key("TEST_SERVER")
+TEST_SERVER = dotenv.get_key(".env", "TEST_SERVER")
 
 if not TEST_SERVER:
     raise ConnectionError("Server address needed as TEST_SERVER in .env file")
 
-def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 5) -> None:
+def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 3) -> None:
     """Play the piezo buzzer as a warning that this is
     validation mode
     """
@@ -33,33 +34,21 @@ def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 5) -> None:
         time.sleep(1)
     piezo_pwm.deinit()
 
-def setup_validation(menorah: Menorah, wifi: WiFi) -> None:
+def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
     """Test function for validation testing"""
+    global TEST_SERVER
 
     # Play the piezo warning
-    play_piezo_warning(menorah.piezo_pin)
+    play_piezo_warning(menorah_obj.piezo_pin)
 
     # Setup up the test server
-    candle_lighting_times = wifi.get_candle_lighting_times()
-    payload = {
-        "times": candle_lighting_times,
-        "burnout": BURNOUT,
-    }
-    wifi.requests.post(TEST_SERVER+"/time/setup", data=payload)
+    response = wifi_obj.requests.post("http://"+TEST_SERVER+"/setup")
 
-    # Monkeypatch a new get_time() method for testing
-    def get_time(self) -> str:
-        """Validation version of the time getting method"""
-        response = self.requests.get(TEST_SERVER + "/time")
-        return response.text
-    wifi.get_time = get_time
+    for time in wifi_obj.get_candle_lighting_times():
+        wifi_obj.requests.patch("http://"+TEST_SERVER+"/setup/time/"+time.isoformat())
+    
+    wifi_obj.requests.patch("http://"+TEST_SERVER+"/setup/burnout/"+str(int(BURNOUT)))
+    wifi_obj.requests.patch("http://"+TEST_SERVER+"/setup/finalize")
 
-    # Monkeypatch a new play_sound() method for testing
-    def play_sound(self, filename: str) -> None:
-        """Play a single tone instead of a song"""
-        piezo_pwm = PWMOut(self.piezo_pin, frequency=512, duty_cycle=0)
-        piezo_pwm.duty_cycle = 65535 // 2
-        time.sleep(1)
-        piezo_pwm.duty_cycle = 0
-        piezo_pwm.deinit()
-    menorah.play_sound = play_sound
+    wifi_manager.TIME_URL = "http://"+TEST_SERVER+"/time"
+    menorah.SOUND_FILE = "support/test.rtttl"    

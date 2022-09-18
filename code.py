@@ -15,7 +15,6 @@ import time
 import dotenv
 import asyncio
 import board
-import usb_cdc
 from adafruit_datetime import timedelta
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
@@ -104,7 +103,7 @@ def main() -> None:
             # Manage turning the candles off at the appropriate time
             menorah.light_candles(night_index + 1)
             if not menorah.is_muted:
-                menorah.play_sound("support/maoztzur.rtttl")
+                menorah.play_sound()
             while wifi.get_datetime() < off_time:
                 menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
             if BURNOUT:
@@ -149,7 +148,7 @@ wifi = WiFi()
 
 connection_status = ConnectionStatus()
 
-is_validation = usb_cdc.console.connected and dotenv.get_key("TEST_SERVER")
+is_validation = dotenv.get_key(".env", "TEST_SERVER")
 
 if __name__ == "__main__":
     asyncio.run(setup_menorah())

@@ -123,7 +123,6 @@ class WiFi:
         """
 
         current_datetime: datetime = datetime.fromisoformat(self.get_time())
-        current_datetime._tzinfo = timezone.utc  # pylint: disable=protected-access
         return current_datetime
 
     def get_time(self) -> str:
@@ -133,4 +132,4 @@ class WiFi:
         """
 
         response = self.requests.get(TIME_URL)
-        return response.text
+        return response.text.strip('"').strip("'")

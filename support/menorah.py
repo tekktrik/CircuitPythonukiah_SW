@@ -25,6 +25,8 @@ except ImportError:
     pass
 
 
+SOUND_FILE = "support/maoztzur.rtttl"
+
 class Menorah:
     """Class for representing the menorah and manages lighting and flickering the candles
 
@@ -57,6 +59,9 @@ class Menorah:
 
         time_diff: timedelta = lighting_time - current_time
         time_diff_s = time_diff.total_seconds()
+        print("Lighting time:", lighting_time)
+        print("Current time:", current_time)
+        print("Time Diff:", time_diff_s)
         if time_diff_s > 600:
             return 600
         if time_diff_s > 60:
@@ -74,6 +79,7 @@ class Menorah:
         time_to_sleep = Menorah.get_sleep_time_based_on_delta(
             lighting_time, current_time
         )
+        print(time_to_sleep)
         if time_to_sleep > 0:
             time.sleep(time_to_sleep)
 
@@ -118,12 +124,12 @@ class Menorah:
         """Whether the speaker is set to the muted position"""
         return not self._mute_dio.value
 
-    def play_sound(self, sound_file: str) -> None:
+    def play_sound(self) -> None:
         """Play the given RTTTL file
 
         :param str sound_file: The RTTTL sound file to play
         """
 
-        with open(sound_file, mode="r", encoding="utf-8") as rtttl_file:
+        with open(SOUND_FILE, mode="r", encoding="utf-8") as rtttl_file:
             rtttil_contents = rtttl_file.read()
         play(self.piezo_pin, rtttil_contents)
