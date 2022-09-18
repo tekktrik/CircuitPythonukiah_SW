@@ -16,18 +16,17 @@ from typing import Optional, Sequence
 
 
 class ServerInfo:
-    def __init__(
-        self,
-        is_testing: bool = False,
-        simulated_time: Optional[datetime] = None,
-        candle_lighting_times: Sequence[datetime] = (),
-        burnout: bool = False,
-    ):
-        self.is_testing = is_testing
-        self._simulated_time = simulated_time if simulated_time else datetime.now()
+    """Class for holding server information and status"""
+
+    def __init__(self):
+        self.is_testing: bool = False
+        """Whether the server is actively testing"""
+        self._simulated_time = datetime.now()
         self._set_time = datetime.now()
-        self.candle_lighting_times = candle_lighting_times
-        self.burnout = burnout
+        self.candle_lighting_times: list[datetime] = []
+        """The stored candle lighting times"""
+        self.burnout: bool = False
+        """Whether burnout is set"""
         self._test_day_index = 0
         self.return_turnoff_time = False
 
