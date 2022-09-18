@@ -36,7 +36,7 @@ def display_error() -> None:
 async def display_loading(setup_status: ConnectionStatus, interval: float = 1) -> None:
     """Displays loading state using menorah lights
 
-    :param ConnectonStatus sif usb_cdc.console.connected and not menorah.is_muted:etup_status: The ConnectionStatus linking the setup methods
+    :param ConnectonStatus setup_status: The ConnectionStatus linking the setup methods
     :param float interval: How long to wait between lighting state changes
     """
 
