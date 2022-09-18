@@ -32,6 +32,7 @@ class ServerInfo:
 
     @property
     def simulated_time(self) -> datetime:
+        """The current simulated time"""
         return self._simulated_time + self.time_since_set
 
     @simulated_time.setter
@@ -41,10 +42,12 @@ class ServerInfo:
 
     @property
     def time_since_set(self) -> timedelta:
+        """The amount of time since the simulated time was set"""
         return datetime.now() - self._set_time
 
     @property
     def test_day(self) -> int:
+        """The day of the current test (starts from 1)"""
         return self._test_day_index + 1
 
     @test_day.setter
@@ -53,10 +56,12 @@ class ServerInfo:
 
     @property
     def current_lighting_time(self) -> datetime:
+        """The current candle lighting time for the active test day"""
         return self.candle_lighting_times[self._test_day_index]
 
     @property
     def target_time(self) -> datetime:
+        """The "taraget" time to use, based off of the current server settigns"""
         if self._test_day_index == len(self.candle_lighting_times):
             return self.candle_lighting_times[-1] + timedelta(hours=24)
         if self.return_turnoff_time:
