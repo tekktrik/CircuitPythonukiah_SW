@@ -2,6 +2,16 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""
+`valid.py`
+=========-
+
+Validation testing code used for testing code
+
+* Author: Alec Delaney
+
+"""
+
 import time
 import dotenv
 from pwmio import PWMOut
