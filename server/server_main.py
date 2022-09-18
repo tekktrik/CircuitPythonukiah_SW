@@ -12,9 +12,8 @@ Main code for running the validation test code on the server
 """
 
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import Optional
 from fastapi import FastAPI, Response, status
-from pydantic import BaseModel
 from server_info import ServerInfo
 
 app = FastAPI()
