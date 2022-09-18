@@ -54,7 +54,7 @@ def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
     play_piezo_warning(menorah_obj.piezo_pin)
 
     # Setup up the test server
-    response = wifi_obj.requests.post("http://" + TEST_SERVER + "/setup")
+    wifi_obj.requests.post("http://" + TEST_SERVER + "/setup")
 
     for time in wifi_obj.get_candle_lighting_times():
         wifi_obj.requests.patch(
