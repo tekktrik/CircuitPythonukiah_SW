@@ -16,6 +16,8 @@ import sys
 import socket
 import importlib
 
+sys.path.insert(0, "/microcontroller")
+
 
 MODULE_NAMES = [
     ("wifi", None, []),
