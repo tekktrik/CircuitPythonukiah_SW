@@ -12,7 +12,7 @@ Main code for running the validation test code on the server
 """
 
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import Optional, Literal
 from fastapi import FastAPI, Response, status
 from server_info import ServerInfo
 
@@ -31,7 +31,11 @@ def setup() -> None:
 
 @app.patch("/setup/time/{candle_lighting}")
 def setup_time(candle_lighting: str) -> None:
-    """Load times into server"""
+    """Load times into server
+
+    :param str candle_lighting: The candle lighting time, as an ISO
+        formatted string
+    """
     if not isinstance(server_info.candle_lighting_times, list):
         server_info.candle_lighting_times = list(server_info.candle_lighting_times)
     new_lighting_time = datetime.fromisoformat(candle_lighting)
@@ -39,13 +43,17 @@ def setup_time(candle_lighting: str) -> None:
 
 
 @app.patch("/setup/burnout/{setting}")
-def setup_burnout(setting: int) -> None:
-    """Load burnout setting into server"""
+def setup_burnout(setting: Literal[0, 1]) -> None:
+    """Load burnout setting into server
+
+    :param int setting: The settings for burnout
+    """
     server_info.burnout = bool(setting)
 
 
 @app.patch("/setup/finalize")
 def finalize_setup() -> None:
+    """Finalize the setup process"""
     server_info.simulated_time = server_info.candle_lighting_times[0] - timedelta(
         seconds=10
     )
