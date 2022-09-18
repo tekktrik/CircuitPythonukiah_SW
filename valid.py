@@ -56,9 +56,9 @@ def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
     # Setup up the test server
     wifi_obj.requests.post("http://" + TEST_SERVER + "/setup")
 
-    for time in wifi_obj.get_candle_lighting_times():
+    for candle_time in wifi_obj.get_candle_lighting_times():
         wifi_obj.requests.patch(
-            "http://" + TEST_SERVER + "/setup/time/" + time.isoformat()
+            "http://" + TEST_SERVER + "/setup/time/" + candle_time.isoformat()
         )
 
     wifi_obj.requests.patch(
