@@ -74,6 +74,7 @@ async def setup_menorah() -> None:
     await asyncio.gather(loading_task, connection_task)
 
 
+# pylint: disable=too-many-branches
 def main() -> None:
     """Main function"""
 
