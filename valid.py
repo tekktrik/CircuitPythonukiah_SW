@@ -20,7 +20,7 @@ from support import wifi_manager, menorah
 
 try:
     import typing  # pylint: disable=unused-import
-    from microcontroller import Pin
+    from microcontroller import Pin  # pylint: disable=ungrouped-imports
     from support.menorah import Menorah
     from support.wifi_manager import WiFi
 except ImportError:
