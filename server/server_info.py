@@ -14,6 +14,7 @@ Code for maintaining the server information and status
 from datetime import datetime, timedelta
 
 
+# pylint: disable=too-many-instance-attributes
 class ServerInfo:
     """Class for holding server information and status"""
 
