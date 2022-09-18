@@ -17,7 +17,7 @@ from secrets import secrets, location
 import socketpool
 import wifi
 import adafruit_requests as requests
-from adafruit_datetime import datetime, timezone, timedelta
+from adafruit_datetime import datetime, timedelta
 
 try:
     from typing import List
@@ -123,12 +123,6 @@ class WiFi:
         """
 
         current_datetime: datetime = datetime.fromisoformat(self.get_time())
-        current_datetime._tzinfo = timezone.utc  # pylint: disable=protected-access
-
-        # add_delta = timedelta(275, hours=12)
-        # current_datetime += add_delta
-        # print(current_datetime)
-
         return current_datetime
 
     def get_time(self) -> str:
@@ -138,4 +132,4 @@ class WiFi:
         """
 
         response = self.requests.get(TIME_URL)
-        return response.text
+        return response.text.strip('"').strip("'")

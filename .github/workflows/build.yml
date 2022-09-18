@@ -4,7 +4,7 @@
 
 name: Build CI
 
-on: [pull_request, push]
+on: [pull_request, push, workflow_dispatch]
 
 jobs:
   test:
@@ -29,8 +29,8 @@ jobs:
     - name: Versions
       run: |
         python3 --version
-    - name: Checkout Current Repo
-      uses: actions/checkout@v1
+    - name: Checkout current repo
+      uses: actions/checkout@v3
       with:
         submodules: true
     - name: Checkout tools repo
@@ -58,3 +58,23 @@ jobs:
     - name: Test code
       run: |
         pytest --location ${{ secrets.location }}
+  deploy-server:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.x"
+    - name: Install sshpass
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y sshpass
+    - name: Checkout current repo
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+    - name: Deploy to server
+      run: |
+        sshpass -p "${{ secrets.server_password }}" scp -r server ${{ secrets.server_location }}

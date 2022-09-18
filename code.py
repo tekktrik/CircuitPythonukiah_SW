@@ -13,12 +13,14 @@ Main code for functionality, as well as functionalities involving multiple modul
 
 import time
 import asyncio
+import dotenv
 import board
 from adafruit_datetime import timedelta
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.setup_helper import ConnectionStatus
+from valid import setup_validation, play_piezo_warning
 from settings import BURNOUT
 
 
@@ -72,6 +74,7 @@ async def setup_menorah() -> None:
     await asyncio.gather(loading_task, connection_task)
 
 
+# pylint: disable=too-many-branches
 def main() -> None:
     """Main function"""
 
@@ -101,9 +104,9 @@ def main() -> None:
             # Manage turning the candles off at the appropriate time
             menorah.light_candles(night_index + 1)
             if not menorah.is_muted:
-                menorah.play_sound("support/maoztzur.rtttl")
-                while wifi.get_datetime() < off_time:
-                    menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
+                menorah.play_sound()
+            while wifi.get_datetime() < off_time:
+                menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
             if BURNOUT:
                 menorah.turn_off_candles()
 
@@ -111,7 +114,13 @@ def main() -> None:
         final_off_time = lighting_times[7] + timedelta(hours=24)
         while wifi.get_datetime() < final_off_time:
             menorah.sleep_based_on_delta(final_off_time, wifi.get_datetime())
-            menorah.turn_off_candles()
+        menorah.turn_off_candles()
+
+    if is_validation:
+        play_piezo_warning(menorah.piezo_pin)
+
+    while True:
+        pass
 
 
 # Initialize candles
@@ -141,6 +150,10 @@ wifi = WiFi()
 
 connection_status = ConnectionStatus()
 
+is_validation = dotenv.get_key(".env", "TEST_SERVER")
+
 if __name__ == "__main__":
     asyncio.run(setup_menorah())
+    if is_validation:
+        setup_validation(menorah, wifi)
     main()
