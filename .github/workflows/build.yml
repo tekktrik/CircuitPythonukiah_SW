@@ -78,3 +78,4 @@ jobs:
     - name: Deploy to server
       run: |
         sshpass -p "${{ secrets.server_password }}" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r server ${{ secrets.server_location }}
+        sshpass -p "${{ secrets.server_password }}" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null requirements.txt ${{ secrets.server_location }}
