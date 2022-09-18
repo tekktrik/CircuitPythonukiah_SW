@@ -12,7 +12,6 @@ Code for maintaining the server information and status
 """
 
 from datetime import datetime, timedelta
-from typing import Optional, Sequence
 
 
 class ServerInfo:
