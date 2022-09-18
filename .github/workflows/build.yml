@@ -60,7 +60,7 @@ jobs:
         pytest --location ${{ secrets.location }}
   deploy-server:
     runs-on: ubuntu-latest
-    needs: [test]
+    needs: test
     if: github.ref == 'refs/heads/main'
     steps:
     - name: Set up Python 3.x
