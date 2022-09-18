@@ -12,8 +12,8 @@ Main code for functionality, as well as functionalities involving multiple modul
 """
 
 import time
-import dotenv
 import asyncio
+import dotenv
 import board
 from adafruit_datetime import timedelta
 from digitalio import DigitalInOut, Direction
