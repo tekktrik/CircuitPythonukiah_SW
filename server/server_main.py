@@ -57,7 +57,7 @@ def get_time(response: Response) -> Optional[str]:
     """Time API for the server"""
     if not server_info.is_testing:
         response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
-        return
+        return None
     sim_time = server_info.simulated_time
     if sim_time > server_info.target_time:
         if server_info.test_day != 9:  # If not last day...
