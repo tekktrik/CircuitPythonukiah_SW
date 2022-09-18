@@ -28,6 +28,8 @@ current_path_comps = current_path.split(os.sep)
 support_path = os.sep + os.path.join(*current_path_comps[:-2])
 sys.path.append(support_path)
 
+sys.path.insert(0, "microcontroller")
+
 # pylint: disable=wrong-import-position
 
 from support.menorah import Menorah
