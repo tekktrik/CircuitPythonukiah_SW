@@ -17,7 +17,7 @@ from secrets import secrets, location
 import socketpool
 import wifi
 import adafruit_requests as requests
-from adafruit_datetime import datetime, timezone, timedelta
+from adafruit_datetime import datetime, timedelta
 
 try:
     from typing import List
