@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2022 Alec Delaney
+#
+# SPDX-License-Identifier: MIT
+
+# This file is designed to be read by circup
+
+adafruit_datetime
+asyncio
+adafruit_requests
+adafruit_rtttl
