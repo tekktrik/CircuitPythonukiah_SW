@@ -2,9 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-circuitpython-stubs
 adafruit-circuitpython-datetime
 adafruit-circuitpython-asyncio
 adafruit-circuitpython-requests
 adafruit-circuitpython-rtttl
-python-dotenv
