@@ -12,4 +12,4 @@ Optional settings for your menorah!
 
 """
 
-BURNOUT = True
+BURNOUT = False
