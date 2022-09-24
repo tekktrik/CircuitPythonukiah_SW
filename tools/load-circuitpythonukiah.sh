@@ -8,6 +8,6 @@ cp -r microcontroller/. $1
 # Install libraries via circup
 circup install -r requirements-circup.txt
 
-# Create secrets.py and write the template to it
+# Create secrets.py for the device
 cp tools/secrets_template.py $1/
 mv $1/secrets_template.py $1/secrets.py
