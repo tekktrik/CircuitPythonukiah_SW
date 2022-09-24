@@ -120,4 +120,4 @@ secrets.py
 location.py
 
 # VS Code settings
-.vscode/settings.json
+.vscode
