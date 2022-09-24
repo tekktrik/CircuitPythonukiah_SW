@@ -123,7 +123,7 @@ class Menorah:
     @property
     def is_muted(self) -> bool:
         """Whether the speaker is set to the muted position"""
-        return not self._mute_dio.value
+        return self._mute_dio.value
 
     def play_sound(self) -> None:
         """Play the globally defined RTTTL file"""
