@@ -6,7 +6,7 @@
 `secrets.py`
 ============
 
-Secret information for your menorah, like your ZIP code
+Secret information for your menorah
 
 * Author: Alec Delaney
 
