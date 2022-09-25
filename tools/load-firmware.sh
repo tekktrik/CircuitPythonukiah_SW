@@ -23,7 +23,7 @@ do
         echo "Found QTPYS2BOOT device!"
         devicename=$(awk -F'/' '{print $NF}' <<< $line)
         devicepath="/dev/$devicename"
-    fi 
+    fi
 done < <(ls -l /dev/disk/by-label)
 
 # Raise error if device was not found

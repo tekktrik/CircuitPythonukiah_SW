@@ -19,4 +19,3 @@ secrets = {
 location = {
     "zipcode": "12345",
 }
-

@@ -11,7 +11,7 @@ do
         echo "Found CIRCUITPY device!"
         devicename=$(awk -F'/' '{print $NF}' <<< $line)
         devicepath="/dev/$devicename"
-    fi 
+    fi
 done < <(ls -l /dev/disk/by-label)
 
 # Raise error if device was not found
