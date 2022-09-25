@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2022 Alec Delaney
+#
+# SPDX-License-Identifier: MIT
+
+# Transform the circup requirements for GitHub Actions
 while read -r line
 do
     if [[ $line != "" && $line != "#"* ]]
