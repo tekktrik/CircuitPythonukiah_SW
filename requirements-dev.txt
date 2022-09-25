@@ -7,3 +7,4 @@ sphinx
 sphinx-rtd-theme
 circuitpython-stubs
 python-dotenv
+circup
