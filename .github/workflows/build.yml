@@ -35,7 +35,7 @@ jobs:
         submodules: true
     - name: Install dependencies
       run: |
-        sh tools/install-reqs.sh
+        bash tools/install-reqs.sh
     - name: Pip install dev tools
       run: |
         pip install --force-reinstall -r requirements-dev.txt
