@@ -2,16 +2,57 @@
 #
 # SPDX-License-Identifier: MIT
 
-# Get username and device path
-username="$(whoami)"
-devicepath="/run/media/$username/CIRCUITPY"
+# Get device to mount
+echo "Looking for CIRCUITPY device..."
+while read -r line
+do
+    if [[ $line == *"CIRCUITPY"* ]]
+    then
+        echo "Found CIRCUITPY device!"
+        devicename=$(awk -F'/' '{print $NF}' <<< $line)
+        devicepath="/dev/$devicename"
+    fi 
+done < <(ls -l /dev/disk/by-label)
+
+# Raise error if device was not found
+if [[ -z $devicepath ]]
+then
+    echo "CIRCUITPY device not found!"
+    exit 1
+fi
+
+# Get device mount path
+mountpath="/mnt/CIRCUITPY"
+
+# Create mount folder if needed, and clear contents
+echo "Creating mount point..."
+if [[ -d $mountpath ]]
+then
+    rm -r $mountpath
+fi
+mkdir $mountpath
+
+# Mount as USB
+echo "Mounting..."
+mount $devicepath $mountpath
 
 # Copy the code from microcontroller/ over to the ESP32-S2
-cp -r microcontroller/. $devicepath
-
-# Install libraries via circup
-circup install -r requirements-circup.txt
+echo "Copying files from microcontroller folder..."
+cp -r microcontroller/. $mountpath
 
 # Create secrets.py for the device
-cp tools/secrets_template.py $devicepath
-mv $devicepath/secrets_template.py $devicepath/secrets.py
+echo "Creating secrets.py file..."
+cp tools/secrets_template.py $mountpath
+mv $mountpath/secrets_template.py $mountpath/secrets.py
+
+# Install libraries via circup
+echo "Installing libraries via circuo..."
+circup install -r requirements-circup.txt
+
+# Unmount the CircuitPythonukiah and remove folder
+echo "Removing mount point and cleaning up..."
+umount $devicepath
+rm -r $mountpath
+
+# Announce completion
+echo "Done loading software!"
