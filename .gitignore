@@ -121,3 +121,6 @@ location.py
 
 # VS Code settings
 .vscode
+
+# Project-specific files
+tools/archive/*

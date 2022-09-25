@@ -33,15 +33,9 @@ jobs:
       uses: actions/checkout@v3
       with:
         submodules: true
-    - name: Checkout tools repo
-      uses: actions/checkout@v2
-      with:
-        repository: adafruit/actions-ci-circuitpython-libs
-        path: actions-ci
     - name: Install dependencies
-      # (e.g. - apt-get: gettext, etc; pip: circuitpython-build-tools, requirements.txt; etc.)
       run: |
-        source actions-ci/install.sh
+        bash tools/install-reqs.sh
     - name: Pip install dev tools
       run: |
         pip install --force-reinstall -r requirements-dev.txt
