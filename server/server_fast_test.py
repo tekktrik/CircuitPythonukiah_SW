@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: MIT
 
 """
-`server_main`
-=============
+`server_fast_test.py`
+=====================
 
-Main code for running the validation test code on the server
+Main code for running the "fast" validation test code on the server
 
 * Author: Alec Delaney
 """
