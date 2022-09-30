@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2022 Alec Delaney
+#
+# SPDX-License-Identifier: MIT
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  upload-mpy-zips:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the current repo
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+    - name: Run MPY Action
+      uses: tekktrik/build-mpy@main
+      with:
+        cpy-tag: "7.2.0"
+        mpy-directory: "microcontroller"

@@ -33,11 +33,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         submodules: true
-    - name: Run MPY Action
-      uses: tekktrik/build-mpy@main
-      with:
-        cpy-tag: "7.2.0"
-        mpy-directory: "microcontroller"
     - name: Install dependencies
       run: |
         bash tools/install-reqs.sh
