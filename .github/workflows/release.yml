@@ -20,8 +20,8 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         cpy-tag: "7.2.0"
         mpy-directory: "microcontroller"
-        mpy-manifest-file: "microcontroller/mpy_manifest.txt"
+        mpy-manifest-file: "mpy_manifest.txt"
         mpy-manifest-type: "exclude"
         zip-directory: "microcontroller"
-        zip-manifest-file: "microcontroller/zip_manifest.txt"
+        zip-manifest-file: "zip_manifest.txt"
         zip-manifest-type: "exclude"

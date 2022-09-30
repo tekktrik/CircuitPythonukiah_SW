@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2022 Alec Delaney
+#
+# SPDX-License-Identifier: MIT
+
+# Since the CI will look only at the microcontroller directory,
+# that's the basis for all filepaths here
+
+zip_manifest.txt
+mpy_manifest.txt
+support/maoztzur.license
+support/test.rtttl.license
