@@ -17,5 +17,6 @@ jobs:
     - name: Run MPY Action
       uses: tekktrik/build-mpy@main
       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         cpy-tag: "7.2.0"
         mpy-directory: "microcontroller"
