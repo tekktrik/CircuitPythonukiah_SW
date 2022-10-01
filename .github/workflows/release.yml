@@ -18,7 +18,7 @@ jobs:
       uses: tekktrik/build-mpy@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        circuitpy-tag: "7.2.0"
+        circuitpy-tag: "8.0.0-beta.0"
         mpy-directory: "microcontroller"
         mpy-manifest-file: "mpy_manifest.txt"
         mpy-manifest-type: "exclude"
