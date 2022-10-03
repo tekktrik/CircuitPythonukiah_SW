@@ -15,7 +15,7 @@ jobs:
       with:
         submodules: true
     - name: Run MPY Action
-      uses: tekktrik/build-mpy@v1
+      uses: adafruit/build-mpy@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         circuitpy-tag: "8.0.0-beta.0"
