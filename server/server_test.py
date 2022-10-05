@@ -43,12 +43,12 @@ def setup_time(candle_lighting: str) -> None:
 
 
 @app.patch("/setup/burnout/{setting}")
-def setup_burnout(setting: Literal[0, 1]) -> None:
+def setup_burnout(setting: bool) -> None:
     """Load burnout setting into server
 
     :param int setting: The settings for burnout
     """
-    server_info.burnout = bool(setting)
+    server_info.burnout = setting
 
 
 @app.patch("/setup/test-type/{test_type}")
