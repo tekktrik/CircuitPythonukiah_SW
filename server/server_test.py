@@ -12,7 +12,7 @@ Main code for running the "fast" validation test code on the server
 """
 
 from datetime import datetime, timedelta
-from typing import Optional, Literal
+from typing import Optional
 from fastapi import FastAPI, Response, status
 from server_info import ServerInfo
 
