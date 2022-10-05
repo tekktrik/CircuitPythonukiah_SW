@@ -48,7 +48,7 @@ def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 3) -> None:
     piezo_pwm.deinit()
 
 
-def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
+def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi, test_type: str) -> None:
     """Test function for validation testing
 
     :param Menorah menorah_obj: The Menorah object
@@ -68,6 +68,9 @@ def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
 
     wifi_obj.requests.patch(
         "http://" + TEST_SERVER + "/setup/burnout/" + str(int(BURNOUT))
+    )
+    wifi_obj.requests.patch(
+        "http://" + TEST_SERVER + "/setup/test-type/" + test_type.lower()
     )
     wifi_obj.requests.patch("http://" + TEST_SERVER + "/setup/finalize")
 

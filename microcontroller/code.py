@@ -151,9 +151,10 @@ wifi = WiFi()
 connection_status = ConnectionStatus()
 
 is_validation = dotenv.get_key(".env", "TEST_SERVER")
+validation_type = dotenv.get_key(".env", "TEST_TYPE")
 
 if __name__ == "__main__":
     asyncio.run(setup_menorah())
     if is_validation:
-        setup_validation(menorah, wifi)
+        setup_validation(menorah, wifi, validation_type)
     main()
