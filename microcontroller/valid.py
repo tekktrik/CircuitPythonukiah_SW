@@ -48,12 +48,15 @@ def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 3) -> None:
     piezo_pwm.deinit()
 
 
-def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
+def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi, test_type: str) -> None:
     """Test function for validation testing
 
     :param Menorah menorah_obj: The Menorah object
     :param WiFi wifi_obj: The WiFi object
     """
+
+    # Make sure test type is lowercase
+    test_type = test_type.lower()
 
     # Play the piezo warning
     play_piezo_warning(menorah_obj.piezo_pin)
@@ -69,7 +72,10 @@ def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi) -> None:
     wifi_obj.requests.patch(
         "http://" + TEST_SERVER + "/setup/burnout/" + str(int(BURNOUT))
     )
+    wifi_obj.requests.patch("http://" + TEST_SERVER + "/setup/test-type/" + test_type)
     wifi_obj.requests.patch("http://" + TEST_SERVER + "/setup/finalize")
 
     wifi_manager.TIME_URL = "http://" + TEST_SERVER + "/time"
-    menorah.SOUND_FILE = "support/test.rtttl"
+
+    if test_type == "fast":
+        menorah.SOUND_FILE = "support/test.rtttl"

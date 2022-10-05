@@ -27,6 +27,8 @@ class ServerInfo:
         """The stored candle lighting times"""
         self.burnout: bool = False
         """Whether burnout is set"""
+        self.test_type: str = ""
+        """The type of testing"""
         self._test_day_index = 0
         self.return_turnoff_time = False
 
