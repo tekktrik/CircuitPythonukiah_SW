@@ -72,12 +72,10 @@ def setup_validation(menorah_obj: Menorah, wifi_obj: WiFi, test_type: str) -> No
     wifi_obj.requests.patch(
         "http://" + TEST_SERVER + "/setup/burnout/" + str(int(BURNOUT))
     )
-    wifi_obj.requests.patch(
-        "http://" + TEST_SERVER + "/setup/test-type/" + test_type
-    )
+    wifi_obj.requests.patch("http://" + TEST_SERVER + "/setup/test-type/" + test_type)
     wifi_obj.requests.patch("http://" + TEST_SERVER + "/setup/finalize")
 
     wifi_manager.TIME_URL = "http://" + TEST_SERVER + "/time"
-    
+
     if test_type == "fast":
         menorah.SOUND_FILE = "support/test.rtttl"
