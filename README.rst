@@ -1,6 +1,8 @@
 CircuitPythonukiah Software
 ===========================
 
+The software for all aspects of the CircuitPythonukiah project.
+
 Software Dependencies
 =====================
 This project depends on:
@@ -48,7 +50,7 @@ You can either use the automated tool to load the necessary drivers and software
 Automated Installation of Drivers and Software
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you're using bash, you can use ``load-software.sh`` to manage loading the software and drivers
+If you're using bash, you can use ``load-software.sh`` to manage loading the drivers and software
 onto the board.  First you'll want to make sure you have ``circup`` installed.  Then, just make sure
 the microcontroller is in USB mode (showing as ``CIRCUITPY``), and run the script from the root folder:
 
