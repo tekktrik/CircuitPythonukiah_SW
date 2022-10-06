@@ -61,8 +61,8 @@ Note that this requires root access (hence the use of ``sudo``).
 This will also generate a file named ``secrets.py``; instructions for filling out this file can be found
 in the project parent repository.
 
-Manually Adding Modules & Drivers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Manually Adding Drivers
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Please ensure all module & driver dependencies are available on the CircuitPython filesystem. This is
 easily achieved by downloading the Adafruit library and driver bundle:
