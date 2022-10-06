@@ -8,7 +8,7 @@ Software Dependencies
 =====================
 This project depends on:
 
-* `Adafruit CircuitPython <https://github.com/adafruit/circuitpython>`_ (7.1.0-beta.0 or later)
+* `Adafruit CircuitPython <https://github.com/adafruit/circuitpython>`_ (8.0.0-beta.0 or later)
 * `CircuitPython asyncio module <https://github.com/adafruit/Adafruit_CircuitPython_asyncio>`_
 * `CircuitPython datetime module <https://github.com/adafruit/Adafruit_CircuitPython_Datetime>`_
 * `CircuitPython requests module <https://github.com/adafruit/Adafruit_CircuitPython_Requests>`_
