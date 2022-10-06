@@ -58,10 +58,8 @@ the microcontroller is in USB mode (showing as ``CIRCUITPY``), and run the scrip
 
     sudo bash tools/load-software.sh
 
-Note that this requires root access (hence the use of ``sudo``).
-
-This will also generate a file named ``secrets.py``; instructions for filling out this file can be found
-in the project parent repository.
+Note that this requires root access (hence the use of ``sudo``).  This will also generate a file named
+``secrets.py``; instructions for filling out this file can be found in the project parent repository.
 
 Manually Adding Drivers
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -90,7 +88,7 @@ Additionally, you'll want to add a file named ``secrets.py`` to the filesystem t
     }
 
     location = {
-        "zipcode" = "Your5DigitZipcode",
+        "zipcode" = "12345",
     }
 
 Instructions for filling out this file can be found in the project parent repository.
