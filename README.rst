@@ -37,8 +37,8 @@ Note that this requires root access (hence the use of ``sudo``).
 Manual Installation
 ^^^^^^^^^^^^^^^^^^^
 
-You can fund instructions for installing the latest version of CircuitPython for the QT Py ESP32-S2 here:
-`<https://learn.adafruit.com/adafruit-qt-py-esp32-s2/circuitpython>`_
+You can find instructions for installing the latest version of CircuitPython for the QT Py ESP32-S2 in
+`this guide <https://learn.adafruit.com/adafruit-qt-py-esp32-s2/circuitpython>`_.
 
 Adding Drivers and Software
 ---------------------------
@@ -65,9 +65,7 @@ Manually Adding Drivers
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Please ensure all module & driver dependencies are available on the CircuitPython filesystem. This is
-easily achieved by downloading the Adafruit library and driver bundle:
-`<https://circuitpython.org/libraries>`_
-
+easily achieved by downloading the `Adafruit CircuitPython Bundle <https://circuitpython.org/libraries>`_.
 You can either use ``circup`` or manually download the libraries listed in ``requirements-circup.txt``.
 
 Manually Adding Software
