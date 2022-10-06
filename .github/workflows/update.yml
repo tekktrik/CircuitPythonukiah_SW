@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2022 Alec Delaney
+#
+# SPDX-License-Identifier: MIT
+
+name: Update Parent Repository
+
+on: [push, workflow_dispatch]
+
+jobs:
+  pr-parent-submodule:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Submit PR to CircuitPythonuiah
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.HELPER_BOT_TOKEN }}
+        repository: tekktrik/CircuitPythonukiah
+        event-type: update-submodule
+        client-payload: '{"type": "software", "sha": "${{ github.sha }}"}'
