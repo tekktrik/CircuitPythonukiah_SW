@@ -50,7 +50,7 @@ class WiFi:
                 break
             except RuntimeError as runtime_error:
                 if attempt != 9:
-                    print("Could not connect, retrying in 5 seconds...")
+                    #print("Could not connect, retrying in 5 seconds...")
                     await asyncio.sleep(5)
                 else:
                     raise runtime_error

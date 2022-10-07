@@ -60,9 +60,9 @@ class Menorah:
 
         time_diff: timedelta = lighting_time - current_time
         time_diff_s = time_diff.total_seconds()
-        print("Lighting time:", lighting_time)
-        print("Current time:", current_time)
-        print("Time Diff:", time_diff_s)
+        #print("Lighting time:", lighting_time)
+        #print("Current time:", current_time)
+        #print("Time Diff:", time_diff_s)
         if time_diff_s > 600:
             return 600
         if time_diff_s > 60:
@@ -80,7 +80,7 @@ class Menorah:
         time_to_sleep = Menorah.get_sleep_time_based_on_delta(
             lighting_time, current_time
         )
-        print(f"Sleeping for {time_to_sleep} seconds")
+        #print(f"Sleeping for {time_to_sleep} seconds")
         if time_to_sleep > 0:
             time.sleep(time_to_sleep)
 
