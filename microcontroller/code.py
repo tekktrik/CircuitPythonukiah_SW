@@ -23,6 +23,11 @@ from support.setup_helper import ConnectionStatus
 from valid import setup_validation, play_piezo_warning
 from settings import BURNOUT
 
+try:
+    from adafruit_datetime import datetime  # pylint: disable=ungrouped-imports
+except ImportError:
+    pass
+
 
 def display_error() -> None:
     """Displays an error using menorah lights"""
@@ -33,14 +38,17 @@ def display_error() -> None:
         time.sleep(1)
 
 
-async def display_loading(setup_status: ConnectionStatus, interval: float = 1) -> None:
+async def display_loading(
+    setup_status: ConnectionStatus, interval: float = 1, *, loop: bool = True
+) -> None:
     """Displays loading state using menorah lights
 
     :param ConnectonStatus setup_status: The ConnectionStatus linking the setup methods
     :param float interval: How long to wait between lighting state changes
+    :param bool loop: Whether to loop until connected, or do a single cycle regardless
     """
 
-    while not setup_status.is_connected:
+    while not setup_status.is_connected or not loop:
         for num_candles in range(1, 5):
             menorah.light_candles(num_candles, light_shamash=False)
             await asyncio.sleep(interval)
@@ -51,6 +59,8 @@ async def display_loading(setup_status: ConnectionStatus, interval: float = 1) -
             menorah.light_candles(num_candles, light_shamash=True)
             await asyncio.sleep(interval)
             menorah.turn_off_candles()
+        if not loop:
+            break
 
 
 async def setup_connections(setup_status: ConnectionStatus) -> None:
@@ -73,6 +83,18 @@ async def setup_menorah() -> None:
     await asyncio.gather(loading_task, connection_task)
 
 
+def get_datetime() -> datetime:
+    """Get the current datetime, attempting to reconnect if a network
+    failure occurs
+    """
+
+    while True:
+        try:
+            return wifi.get_datetime()
+        except Exception:  # pylint: disable=broad-except
+            asyncio.run(display_loading(connection_status, interval=0.25, loop=False))
+
+
 # pylint: disable=too-many-branches
 def main() -> None:
     """Main function"""
@@ -85,7 +107,7 @@ def main() -> None:
 
     # Past candle lighting date, no need to do anything
     holiday_end = wifi.get_menorah_off_time(lighting_times[7])
-    if wifi.get_datetime() >= holiday_end:
+    if get_datetime() >= holiday_end:
         while True:
             pass
 
@@ -94,25 +116,25 @@ def main() -> None:
 
         off_time = wifi.get_menorah_off_time(lighting)
 
-        if wifi.get_datetime() < lighting:
+        if get_datetime() < lighting:
             # Manage turning the candles on at the appropriate time
-            while wifi.get_datetime() < lighting:
-                menorah.sleep_based_on_delta(lighting, wifi.get_datetime())
+            while get_datetime() < lighting:
+                menorah.sleep_based_on_delta(lighting, get_datetime())
 
-        if lighting <= wifi.get_datetime() < off_time:
+        if lighting <= get_datetime() < off_time:
             # Manage turning the candles off at the appropriate time
             menorah.light_candles(night_index + 1)
             if not menorah.is_muted:
                 menorah.play_sound()
-            while wifi.get_datetime() < off_time:
-                menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
+            while get_datetime() < off_time:
+                menorah.sleep_based_on_delta(off_time, get_datetime())
             if BURNOUT:
                 menorah.turn_off_candles()
 
     if not BURNOUT:
         final_off_time = lighting_times[7] + timedelta(hours=24)
-        while wifi.get_datetime() < final_off_time:
-            menorah.sleep_based_on_delta(final_off_time, wifi.get_datetime())
+        while get_datetime() < final_off_time:
+            menorah.sleep_based_on_delta(final_off_time, get_datetime())
         menorah.turn_off_candles()
 
     if is_validation:
