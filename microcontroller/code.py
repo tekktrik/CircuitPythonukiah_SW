@@ -61,7 +61,6 @@ async def setup_connections(setup_status: ConnectionStatus) -> None:
 
     try:
         await wifi.connect_to_network()
-        # await wifi.connect_to_ntp()
         setup_status.is_connected = True
     except RuntimeError:
         display_error()
