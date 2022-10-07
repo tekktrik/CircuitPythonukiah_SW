@@ -32,7 +32,7 @@ archived.  For example, if you wanted to load CircuitPython version 8.0.0-beta.1
 
 .. code-block:: shell
 
-    sudo bash tools/load-firmware.sh 8.0.0-beta.1
+    sudo bash tools/load-firmware 8.0.0-beta.1
 
 Note that this requires root access (hence the use of ``sudo``).
 
@@ -56,7 +56,7 @@ the microcontroller is in USB mode (showing as ``CIRCUITPY``), and run the scrip
 
 .. code-block:: shell
 
-    sudo bash tools/load-software.sh
+    sudo bash tools/load-software
 
 Note that this requires root access (hence the use of ``sudo``).  This will also generate a file named
 ``secrets.py``; instructions for filling out this file can be found in the project parent repository.
