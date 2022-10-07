@@ -39,7 +39,7 @@ def display_error() -> None:
 
 
 async def display_loading(
-    setup_status: ConnectionStatus, interval: float = 1, *, loop: bool = True
+    setup_status: ConnectionStatus, interval: float = 1.0, *, loop: bool = True
 ) -> None:
     """Displays loading state using menorah lights
 
