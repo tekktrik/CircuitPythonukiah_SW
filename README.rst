@@ -134,3 +134,8 @@ which can be done using ``uvicorn``.  The CircuitPythonukiah software will then 
 test on the server.
 
 ``requirements-server.txt`` is provided for convenience in recording the Python requirements.
+
+Attributions
+============
+
+Jewish holidays and candle-lighting times are provided by Hebcal.com with a CC BY 4.0 International License.
