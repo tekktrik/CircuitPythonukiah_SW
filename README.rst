@@ -1,6 +1,22 @@
 CircuitPythonukiah Software
 ===========================
 
+.. image:: https://img.shields.io/github/workflow/status/tekktrik/CircuitPythonukiah_SW/Build%20CI/main
+   :target:  https://github.com/tekktrik/CircuitPythonukiah_SW/actions
+   :alt: Build CI status (main branch)
+
+.. image:: https://img.shields.io/github/license/tekktrik/CircuitPythonukiah_SW
+   :target: https://github.com/tekktrik/circlink/blob/main/LICENSE
+   :alt: License
+
+.. image:: https://img.shields.io/badge/impl.-circuitpython-blue
+   :target: https://github.com/adafruit/circuitpython.git
+   :alt: CircuitPython
+
+.. image:: https://img.shields.io/maintenance/yes/2022
+   :target: https://github.com/tekktrik/CircuitPythonukiah_SW/issues
+   :alt: Maintenance
+
 The software for all aspects of the CircuitPythonukiah project.
 
 Software Dependencies
