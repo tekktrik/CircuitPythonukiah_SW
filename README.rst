@@ -17,7 +17,7 @@ CircuitPythonukiah Software
    :target: https://github.com/tekktrik/CircuitPythonukiah_SW/issues
    :alt: Maintenance
 
-The software for all aspects of the CircuitPythonukiah project.
+The software for all aspects of the `CircuitPythonukiah project <https://github.com/tekktrik/CircuitPythonukiah>`_
 
 Software Dependencies
 =====================
