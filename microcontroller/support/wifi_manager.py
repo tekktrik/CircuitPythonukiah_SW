@@ -18,6 +18,7 @@ import socketpool
 import wifi
 import adafruit_requests as requests
 from adafruit_datetime import datetime, timedelta
+from settings import HOURS_BEFORE_BURNOUT
 
 try:
     from typing import List
@@ -27,7 +28,6 @@ except ImportError:
 TIME_URL = "https://io.adafruit.com/api/v2/time/ISO-8601"
 
 
-# class WiFi(ESP_SPIcontrol):
 class WiFi:
     """Class for representing the Wi-Fi and the associate functions it provides
     to the auto-menorah
@@ -113,7 +113,13 @@ class WiFi:
         :param datetime lighting_time: The time at which candles should be lit for that day
         :return datetime: The associated off time for the candles
         """
-        projected_time: datetime = lighting_time + timedelta(hours=12)
+
+        burnout_hours = int(HOURS_BEFORE_BURNOUT)
+        burnout_minutes = int(HOURS_BEFORE_BURNOUT * 60) % 60
+
+        projected_time: datetime = lighting_time + timedelta(
+            hours=burnout_hours, minutes=burnout_minutes
+        )
         return projected_time
 
     def get_datetime(self) -> datetime:
