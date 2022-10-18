@@ -12,4 +12,5 @@ Optional settings for your menorah!
 
 """
 
-BURNOUT = False
+BURNOUT = True
+HOURS_BEFORE_BURNOUT = 3
