@@ -72,7 +72,7 @@ async def setup_connections(setup_status: ConnectionStatus) -> None:
     try:
         await wifi.connect_to_network()
         setup_status.is_connected = True
-    except RuntimeError:
+    except Exception:  # pylint: disable=broad-except
         display_error()
 
 
