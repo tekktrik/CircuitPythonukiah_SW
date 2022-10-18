@@ -80,15 +80,15 @@ def test_lighting_times(monkeypatch, location):
             (off_time, lighting_time + adafruit_datetime.timedelta(minutes=55), 600)
         )
         assertion_pairs.append(
-            (off_time, lighting_time + adafruit_datetime.timedelta(hours=3), 600)
+            (off_time, lighting_time + adafruit_datetime.timedelta(hours=1), 600)
         )
         assertion_pairs.append(
-            (off_time, lighting_time + adafruit_datetime.timedelta(hours=9), 600)
+            (off_time, lighting_time + adafruit_datetime.timedelta(hours=2), 600)
         )
         assertion_pairs.append(
             (
                 off_time,
-                lighting_time + adafruit_datetime.timedelta(hours=11, minutes=53),
+                lighting_time + adafruit_datetime.timedelta(hours=2, minutes=53),
                 60,
             )
         )
@@ -96,7 +96,7 @@ def test_lighting_times(monkeypatch, location):
             (
                 off_time,
                 lighting_time
-                + adafruit_datetime.timedelta(hours=11, minutes=59, seconds=25),
+                + adafruit_datetime.timedelta(hours=2, minutes=59, seconds=25),
                 35,
             )
         )
