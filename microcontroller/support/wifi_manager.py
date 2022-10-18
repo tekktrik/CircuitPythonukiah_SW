@@ -28,7 +28,6 @@ except ImportError:
 TIME_URL = "https://io.adafruit.com/api/v2/time/ISO-8601"
 
 
-# class WiFi(ESP_SPIcontrol):
 class WiFi:
     """Class for representing the Wi-Fi and the associate functions it provides
     to the auto-menorah
