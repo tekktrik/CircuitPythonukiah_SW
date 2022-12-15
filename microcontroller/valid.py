@@ -28,7 +28,7 @@ except ImportError:
 
 TEST_SERVER = dotenv.get_key(".env", "TEST_SERVER")
 
-if not TEST_SERVER:
+if TEST_SERVER is not None and not TEST_SERVER:
     raise ConnectionError("Server address needed as TEST_SERVER in .env file")
 
 
