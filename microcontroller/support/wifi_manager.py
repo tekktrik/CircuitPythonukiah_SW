@@ -41,7 +41,7 @@ class WiFi:
     async def connect_to_network(self) -> None:
         """Connect to the Wi-Fi network, attempt until connection is made"""
 
-        for attempt in range(5):
+        for attempt in range(10):
             try:
                 wifi.radio.connect(secrets["ssid"], secrets["password"])
                 pool = socketpool.SocketPool(wifi.radio)
