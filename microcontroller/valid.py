@@ -28,9 +28,6 @@ except ImportError:
 
 TEST_SERVER = dotenv.get_key(".env", "TEST_SERVER")
 
-if TEST_SERVER is not None and not TEST_SERVER:
-    raise ConnectionError("Server address needed as TEST_SERVER in .env file")
-
 
 def play_piezo_warning(piezo_pin: Pin, num_buzzes: int = 3) -> None:
     """Play the piezo buzzer as a warning that this is validation mode
