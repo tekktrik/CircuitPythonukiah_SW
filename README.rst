@@ -1,7 +1,7 @@
 CircuitPythonukiah Software
 ===========================
 
-.. image:: https://img.shields.io/github/workflow/status/tekktrik/CircuitPythonukiah_SW/Build%20CI/main
+.. image:: https://img.shields.io/github/actions/workflow/status/tekktrik/CircuitPythonukiah_SW/build.yml?branch=main
    :target:  https://github.com/tekktrik/CircuitPythonukiah_SW/actions
    :alt: Build CI status (main branch)
 
