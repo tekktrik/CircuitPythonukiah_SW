@@ -105,8 +105,10 @@ def main() -> None:
     # Get candle lighting times
     lighting_times = wifi.get_candle_lighting_times()
 
+    final_override = lighting_times[7] + timedelta(hours=24) if not BURNOUT else None
+
     # Past candle lighting date, no need to do anything
-    holiday_end = wifi.get_menorah_off_time(lighting_times[7])
+    holiday_end = wifi.get_menorah_off_time(lighting_times[7], override=final_override)
     if get_datetime() >= holiday_end:
         while True:
             pass
