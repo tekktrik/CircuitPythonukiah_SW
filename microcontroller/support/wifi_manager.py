@@ -21,7 +21,7 @@ from adafruit_datetime import datetime, timedelta
 from settings import HOURS_BEFORE_BURNOUT
 
 try:
-    from typing import List
+    from typing import List, Optional
 except ImportError:
     pass
 
@@ -107,7 +107,9 @@ class WiFi:
         return lighting_times
 
     @staticmethod
-    def get_menorah_off_time(lighting_time: datetime) -> datetime:
+    def get_menorah_off_time(
+        lighting_time: datetime, *, override: Optional[datetime] = None
+    ) -> datetime:
         """Get the time at while candles should be turned off
 
         :param datetime lighting_time: The time at which candles should be lit for that day
@@ -117,9 +119,12 @@ class WiFi:
         burnout_hours = int(HOURS_BEFORE_BURNOUT)
         burnout_minutes = int(HOURS_BEFORE_BURNOUT * 60) % 60
 
-        projected_time: datetime = lighting_time + timedelta(
-            hours=burnout_hours, minutes=burnout_minutes
-        )
+        if not override:
+            projected_time: datetime = lighting_time + timedelta(
+                hours=burnout_hours, minutes=burnout_minutes
+            )
+        else:
+            projected_time = override
         return projected_time
 
     def get_datetime(self) -> datetime:
