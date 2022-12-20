@@ -21,7 +21,7 @@ from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.setup_helper import ConnectionStatus
 from valid import setup_validation, play_piezo_warning
-from settings import BURNOUT
+from settings import BURNOUT, HOURS_BEFORE_BURNOUT
 
 try:
     from adafruit_datetime import datetime  # pylint: disable=ungrouped-imports
@@ -114,19 +114,32 @@ def main() -> None:
     # Compare candle lighting times to current time
     for night_index, lighting in enumerate(lighting_times):
 
-        off_time = wifi.get_menorah_off_time(lighting)
+        alt_off_time_offset = 24 if night_index == 7 else HOURS_BEFORE_BURNOUT
+        alt_off_time = lighting + timedelta(hours=alt_off_time_offset)
+        off_time = wifi.get_menorah_off_time(lighting) if BURNOUT else alt_off_time
+        print(off_time)
 
-        if get_datetime() < lighting:
+        if night_index == 0 or (
+            get_datetime() < lighting and BURNOUT
+        ):  # or (off_time <= get_datetime() < lighting and not BURNOUT):
             # Manage turning the candles on at the appropriate time
             while get_datetime() < lighting:
                 menorah.sleep_based_on_delta(lighting, get_datetime())
 
-        if lighting <= get_datetime() < off_time:
+        if lighting <= get_datetime() < off_time or (
+            night_index != 7
+            and lighting <= get_datetime() < lighting_times[night_index + 1]
+            and not BURNOUT
+        ):
             # Manage turning the candles off at the appropriate time
             menorah.light_candles(night_index + 1)
             if not menorah.is_muted:
                 menorah.play_sound()
-            while get_datetime() < off_time:
+            while get_datetime() < off_time or (
+                night_index != 7
+                and lighting <= get_datetime() < lighting_times[night_index + 1]
+                and not BURNOUT
+            ):
                 menorah.sleep_based_on_delta(off_time, get_datetime())
             if BURNOUT:
                 menorah.turn_off_candles()
