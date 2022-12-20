@@ -105,8 +105,10 @@ def main() -> None:
     # Get candle lighting times
     lighting_times = wifi.get_candle_lighting_times()
 
+    final_override = lighting_times[7] + timedelta(hours=24) if not BURNOUT else None
+
     # Past candle lighting date, no need to do anything
-    holiday_end = wifi.get_menorah_off_time(lighting_times[7])
+    holiday_end = wifi.get_menorah_off_time(lighting_times[7], override=final_override)
     if get_datetime() >= holiday_end:
         while True:
             pass
@@ -114,9 +116,15 @@ def main() -> None:
     # Compare candle lighting times to current time
     for night_index, lighting in enumerate(lighting_times):
 
-        off_time = wifi.get_menorah_off_time(lighting)
+        override = (
+            lighting_times[night_index + 1]
+            if (night_index != 7)
+            else lighting + timedelta(hours=24)
+        )
+        override = override if not BURNOUT else None
+        off_time = wifi.get_menorah_off_time(lighting, override=override)
 
-        if get_datetime() < lighting:
+        if get_datetime() < lighting and (BURNOUT or night_index == 0):
             # Manage turning the candles on at the appropriate time
             while get_datetime() < lighting:
                 menorah.sleep_based_on_delta(lighting, get_datetime())
