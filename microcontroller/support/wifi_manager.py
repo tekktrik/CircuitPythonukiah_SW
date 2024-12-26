@@ -65,7 +65,6 @@ class WiFi:
 
         :return str: The JSON string containing holiday information
         """
-        print(f"Updating for year {self._year_checking}")
 
         calendar_api: str = (
             "http://www.hebcal.com/hebcal?"
@@ -75,8 +74,6 @@ class WiFi:
                 self._year_checking, self._month_checking, location["zipcode"]
             )
         )
-
-        print(calendar_api)
 
         api_response: requests.Response = self.requests.get(calendar_api)
 
@@ -93,7 +90,6 @@ class WiFi:
             title_option_1 = "Chanukah: " + str(num_night) + " Candle"
             title_option_2 = "Chanukah: " + str(num_night) + " Candles"
             if event["title"] == title_option_1 or event["title"] == title_option_2:
-                print("Found night")
                 return datetime.fromisoformat(event["date"])
         self._month_checking = ((self._month_checking + 1) % 13) + 1
         if self._month_checking == 1:
