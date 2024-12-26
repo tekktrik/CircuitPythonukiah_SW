@@ -35,8 +35,13 @@ class WiFi:
 
     def __init__(self) -> None:
         self._latest_events = None
-        self._month_checking = 11
+        self._year_checking = None
+        self._month_checking = 10
         self.requests = None
+
+    def load_year(self, year: int) -> None:
+        """Load the current year"""
+        self._year_checking = year
 
     async def connect_to_network(self) -> None:
         """Connect to the Wi-Fi network, attempt until connection is made"""
@@ -60,15 +65,18 @@ class WiFi:
 
         :return str: The JSON string containing holiday information
         """
+        print(f"Updating for year {self._year_checking}")
 
         calendar_api: str = (
             "http://www.hebcal.com/hebcal?"
             "v=1;maj=on;min=off;i=off;lg=s;"
-            "c=on;year=now;month={0}"
-            ";geo=zip;zip={1};cfg=json".format(
-                self._month_checking, location["zipcode"]
+            "c=on;year={0};month={1}"
+            ";geo=zip;zip={2};cfg=json".format(
+                self._year_checking, self._month_checking, location["zipcode"]
             )
         )
+
+        print(calendar_api)
 
         api_response: requests.Response = self.requests.get(calendar_api)
 
@@ -85,8 +93,11 @@ class WiFi:
             title_option_1 = "Chanukah: " + str(num_night) + " Candle"
             title_option_2 = "Chanukah: " + str(num_night) + " Candles"
             if event["title"] == title_option_1 or event["title"] == title_option_2:
+                print("Found night")
                 return datetime.fromisoformat(event["date"])
-        self._month_checking += 1
+        self._month_checking = ((self._month_checking + 1) % 13) + 1
+        if self._month_checking == 1:
+            self._year_checking += 1
         self._latest_events = self._update_json()
         return self._parse_time_for_night(num_night)
 
