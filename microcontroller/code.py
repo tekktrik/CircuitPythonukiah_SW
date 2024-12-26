@@ -102,6 +102,10 @@ def main() -> None:
     # Turn off lights
     menorah.turn_off_candles()
 
+    # Load the current year into the Wi-Fi manager
+    current_year = get_datetime().year
+    wifi.load_year(current_year)
+
     # Get candle lighting times
     lighting_times = wifi.get_candle_lighting_times()
 
